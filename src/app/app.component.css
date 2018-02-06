@@ -1,0 +1,57 @@
+.container {
+	margin: 0 auto;
+	padding: 15px;
+	background:
+		repeating-linear-gradient(45deg, #ddd, #ddd 5px, #eee 5px, #eee 10px);
+}
+
+.flex {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	align-content: center;
+}
+
+.row {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+ul { padding: 0; }
+li { list-style: none; }
+img {  }
+
+
+
+.team {
+	margin-bottom:25px;
+	padding: 10px 5px;
+}
+.team .left{
+	display: inline-block;
+	vertical-align: top;
+	width: 15%;
+
+}
+.team .right {
+	display: inline-block;
+	vertical-align: middle;
+}
+ul.team-list li {
+	position: relative;
+	border: 1px solid #767676;
+	border-radius:6px;
+	display: inline-block;
+	padding: 5px 5px 1px;
+	margin:5px;
+	/*height:35px;
+	width:35px;
+	*/
+}
+.action {
+	position: absolute;
+	right:0;
+	top: 0;
+}
