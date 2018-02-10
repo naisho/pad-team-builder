@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { MonsterListService } from './monster-list.service';
+import { MonsterListService } from '../monster-list/monster-list.service';
 
 describe('MonsterListService', () => {
   beforeEach(() => {

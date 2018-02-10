@@ -1,29 +1,37 @@
-import { Injectable }       from '@angular/core';
-import { Http, Response }   from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
-import { Observable }       from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+import { Monster } from '../shared/monster'
+import { Awakening } from '../shared/awakening'
+
 
 @Injectable()
 export class PADHerderService {
     constructor(private http: Http) { };
 	
     PADHerderMonsterUrl: string = 'https://www.padherder.com/api/monsters/'
+    PADHerderAwakeningUrl: string = 'https://www.padherder.com/api/awakenings/'
 
     PADHerderAPIUrl = 'https://www.padherder.com/user-api';
 
-    getPADHerderMonsterList() {
-    	// id, name
-    	// element, element2
-    	// type, type2, type3
-    	// hp_max, atk_max, rcv_max
-    	// max_level
-    	// awoken_skills
-    	// image40_href, image60_href
+    getMonsterList(): Observable<Monster[]> {
+    	/* important properties:
+        id, name
+    	element, element2
+    	type, type2, type3
+    	hp_max, atk_max, rcv_max
+    	max_level
+    	awoken_skills
+    	image40_href, image60_href
+        */
     	
 		return this.http
-			// .get(this.PADHerderMonsterUrl)
-            .get('./assets/monsters.json') // use local for dev
+			.get(this.PADHerderMonsterUrl)
+            .map(response => response.json())
             .catch(this.handleError);
 
     	/*
@@ -41,8 +49,15 @@ export class PADHerderService {
 
 			useless
 				version, jp_only, monster_points, name_jp, feed_xp
-    	*/
-    }
+    	    */
+    } // getMonsterList
+
+    getAwakeningList(): Observable<Awakening[]> {
+        return this.http
+            .get(this.PADHerderAwakeningUrl)
+            .map(response => response.json())
+            .catch(this.handleError);
+    } // getAwakeningList
 
 
 

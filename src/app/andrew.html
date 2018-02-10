@@ -45,17 +45,32 @@
 	</div>
 </div>
 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+.popover-container {
+	padding: 5px;
+	background-color: #eee;
+	box-sizing: border-box;
+	border: 2px solid #000;
+	text-align: center;
+}
+</style>
 <div class="popover-container">
 	<div class="header">
-		<!-- search bar placeholder -->
+		<nav class="navbar navbar-light">
+			<form class="container-fluid">
+				<input type="search" class="form-control" placeholder="Search">
+			</form>
+		</nav>
 	</div>
 
 	<div class="content">
 		<section id="mainSort">
-
 		</section>
 		<section id="monsterList">
-
+			<ng-container *ngFor="let mon of globalList">
+				<img src="http://www.padherder.com/{{mon.image60_href}}" width="60">
+			</ng-container>
 		</section>
 		<section id="secondarySort">
 
