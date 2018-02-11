@@ -3,20 +3,26 @@ import { Http, Response }   from '@angular/http';
 
 import { Observable } from 'rxjs/observable'
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
+import { Monster } from '../shared/monster'
+import { Awakening } from '../shared/awakening'
 
 @Injectable()
 export class LocalService {
     constructor(private http: Http) { };
 
-    getMonsterList() {
+    getMonsterList(): Observable<Monster[]> {
 		return this.http
-            .get('./assets/monsters.json')
+            .get('../static/monsters.json')
+            .map(response => response.json())
             .catch(this.handleError);
     }; // getMonsterList
 
-    getAwakeningList() {
+    getAwakeningList(): Observable<Awakening[]> {
         return this.http
-            .get('./assets/awakenings.json')
+            .get('../static/awakenings.json')
+            .map(response => response.json())
             .catch(this.handleError);
     }; // getAwakeningList
 
