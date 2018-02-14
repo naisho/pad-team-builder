@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container"> -->
 	
 
 
@@ -45,40 +45,73 @@
 	</div>
 </div>
 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <style>
-.popover-container {
-	padding: 5px;
-	background-color: #eee;
-	box-sizing: border-box;
-	border: 2px solid #000;
+.popover-card {
+	margin: 0 auto;
 	text-align: center;
+	background-color: #fff;
+	width: 325px;
 }
+.button-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.mdl-cell--att { width: calc(20% - 16px); }
+.att-button { padding: 0; }
+mat-button-toggle {	padding: 0 5px; }
+mat-spinner { margin: 0 auto; }
 </style>
-<div class="popover-container">
-	<div class="header">
-		<nav class="navbar navbar-light">
-			<form class="container-fluid">
-				<input type="search" class="form-control" placeholder="Search">
-			</form>
-		</nav>
-	</div>
 
-	<div class="content">
-		<section id="mainSort">
-		</section>
-		<section id="monsterList">
-			<ng-container *ngFor="let mon of globalList">
-				<img src="http://www.padherder.com/{{mon.image60_href}}" width="60">
-			</ng-container>
-		</section>
-		<section id="secondarySort">
+<div class="container">
+	<mat-card class="popover-card">
+		<form>
+			<mat-form-field style="width: 100%;">
+				<input matInput #search type="search" placeholder="Enter monster name"
+					(input)="filterByName(search.value)" 
+					[formControl]="searchControl" 
+					[errorStateMatcher]="searchMatcher">
+				<mat-error *ngIf="searchControl.hasError('pattern')">
+					Please use valid characters.
+				</mat-error>
+				<mat-error *ngIf="searchControl.hasError('minlength')">
+					Please enter at least two characters.
+				</mat-error>
+			</mat-form-field>
+		</form>
 
-		</section>
-	</div>
+		<mat-card-content>
+			<section id="mainSort">
+			</section>
+			<section id="monsterList">
+				<div *ngIf="filteredList == undefined">
+					<mat-spinner strokeWidth="5" diameter="60"></mat-spinner>
+				</div>
+				<mat-grid-list cols="5" rowHeight="1:1">
+					<mat-grid-tile *ngFor="let mon of filteredList">
+						<img src=".{{mon.image60_href}}" width="60">
+					</mat-grid-tile>
+				</mat-grid-list>
+			</section>
+			<section id="secondarySort">
 
-	<div class="footer">
-		<!-- attribute filter placeholder -->
-		<!-- fire water wood light dark -->
-	</div>
+			</section>
+		</mat-card-content>
+
+		<mat-card-actions>
+			<!-- attribute filter placeholder -->
+			<!-- fire water wood light dark -->
+			<mat-button-toggle-group>
+				<mat-button-toggle><mat-icon>whatshot</mat-icon></mat-button-toggle>
+				<mat-button-toggle><mat-icon>local_drink</mat-icon></mat-button-toggle>
+				<mat-button-toggle><mat-icon>local_florist</mat-icon></mat-button-toggle>
+				<mat-button-toggle><mat-icon>radio_button_unchecked</mat-icon></mat-button-toggle>
+				<mat-button-toggle><mat-icon>radio_button_checked</mat-icon></mat-button-toggle>
+			</mat-button-toggle-group>
+		</mat-card-actions>
+	</mat-card>
 </div>

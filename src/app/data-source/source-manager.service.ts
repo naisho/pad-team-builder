@@ -7,8 +7,8 @@ import { LocalService } from './local.service'
 @Injectable()
 export class DataSource {
     constructor(
-    	private monSource: PADHerderService,
-    	private awkSource: PADHerderService,
+    	private monSource: LocalService,
+    	private awkSource: LocalService,
     	private sortSource: LocalService
     ) { };
 	
