@@ -17,7 +17,7 @@ enum Type { 'evo material', 'balanced', 'physical', 'healer', 'dragon', 'god',
 
 @Component({
   selector: 'app-root',
-  templateUrl: './andrew.html',
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
