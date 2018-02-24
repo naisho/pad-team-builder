@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { DataSource } from './data-source/source-manager.service';
 
 import { Filters } from './shared/filters';
-import { SortOption } from './shared/sortOption';
 
 import { Monster } from './shared/monster';
 
@@ -16,7 +15,6 @@ import 'rxjs/add/operator/map';
 export class MonsterListService {
 	constructor(private dataSource: DataSource,
 		private Filters: Filters,
-		private SortOption: SortOption
 		) {	}
 
 	monsterList$: Observable<Monster[]> = this.dataSource.monsterList$
