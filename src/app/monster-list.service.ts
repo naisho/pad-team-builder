@@ -23,7 +23,7 @@ export class MonsterListService {
 	monsterList$: Observable<Monster[]> = this.dataSource.monsterList$
 		.map(r => this.truncateProps(r))
 		.map(r => this.filterPADObjects(r, this.Filters.isMaxLevel))
-		.map(r => r.sort(this.SortOption.totalSort).slice(0,10))
+		.map(r => r.sort(this.SortOption.totalSort))
 
 	private truncateProps(originalResponse: Monster[]) {
 		let propertyList = ["id","name","element","element2","type","type2","type3","hp_max","atk_max","rcv_max","max_level","awoken_skills","image40_href","image60_href"]
