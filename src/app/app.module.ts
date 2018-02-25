@@ -13,11 +13,9 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule, MatCardModule, MatButtonModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 // data-source
 import { DataSource } from './data-source/source-manager.service';
@@ -29,7 +27,12 @@ import { MonsterListService } from './monster-list.service';
 import { AwakeningListService } from './awakening-list.service';
 
 import { Filters } from './shared/filters';
+<<<<<<< HEAD
 import { AppRoutingModule } from './/app-routing.module';
+=======
+import { SortOption } from './shared/sortOption';
+import { DefaultService } from './default.service';
+>>>>>>> parent of adb0cf6... Merge remote-tracking branch 'refs/remotes/origin/master'
 
 
 @NgModule({
@@ -47,10 +50,14 @@ import { AppRoutingModule } from './/app-routing.module';
     MatButtonToggleModule,
     MatIconModule,
     MatInputModule,
+<<<<<<< HEAD
     MatProgressSpinnerModule,
     MatChipsModule,
     MatDialogModule,
     AppRoutingModule
+=======
+    MatProgressSpinnerModule
+>>>>>>> parent of adb0cf6... Merge remote-tracking branch 'refs/remotes/origin/master'
   ],
   exports: [
     MatGridListModule,
@@ -59,9 +66,13 @@ import { AppRoutingModule } from './/app-routing.module';
     MatButtonToggleModule,
     MatIconModule,
     MatInputModule,
+<<<<<<< HEAD
     MatProgressSpinnerModule,
     MatChipsModule,
     MatDialogModule
+=======
+    MatProgressSpinnerModule
+>>>>>>> parent of adb0cf6... Merge remote-tracking branch 'refs/remotes/origin/master'
   ],
   entryComponents: [ MonsterPickerDialog ],
   declarations: [ AppComponent, TeamViewComponent, FilterComponent, MonsterPickerDialog ],
@@ -69,6 +80,8 @@ import { AppRoutingModule } from './/app-routing.module';
     MonsterListService,
     AwakeningListService,
     Filters,
+    SortOption,
+    DefaultService,
   	
     DataSource,
     LocalService,

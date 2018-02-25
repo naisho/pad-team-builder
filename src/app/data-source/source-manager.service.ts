@@ -7,13 +7,13 @@ import { LocalService } from './local.service'
 @Injectable()
 export class DataSource {
     constructor(
-    	private monsterSource: LocalService,
-    	private awakeningSource: LocalService,
+    	private monSource: LocalService,
+    	private awkSource: LocalService,
     	private sortSource: LocalService
     ) { };
 	
-    monsterList$ = this.monsterSource.getMonsterList();
-    awakeningList$ = this.awakeningSource.getAwakeningList();
+    monsterList$ = this.monSource.getMonsterList();
+    awakeningList$ = this.awkSource.getAwakeningList();
     sortOptionList$ = null;
 
 }
