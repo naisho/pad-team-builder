@@ -1,56 +1,8 @@
-<!-- <div class="container"> -->
-	
-
-
-	<!--
-	<div class="row teamA inherits">
-		<ul class="flex">
-			<li><img src="/assets/img/1746.png"></li>
-			<li><img src="/assets/img/2012.png"></li>
-			<li><img src="/assets/img/1619.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-		</ul>
-	</div>
-	<div class="row teamA subs">
-		<ul class="flex">
-			<li><img src="/assets/img/3535.png"></li>
-			<li><img src="/assets/img/2102.png"></li>
-			<li><img src="/assets/img/3521.png"></li>
-			<li><img src="/assets/img/2948.png"></li>
-			<li><img src="/assets/img/2948.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-		</ul>
-	</div>
-	<div class="row teamB subs">
-		<ul class="flex">
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/2948.png"></li>
-			<li><img src="/assets/img/2540.png"></li>
-			<li><img src="/assets/img/2540.png"></li>
-			<li><img src="/assets/img/2948.png"></li>
-			<li><img src="/assets/img/2903.png"></li>
-		</ul>
-	</div>
-	<div class="row teamB inherits">
-		<ul class="flex">
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/2497.png"></li>
-			<li><img src="/assets/img/998.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-			<li><img src="/assets/img/0.png"></li>
-		</ul>
-	</div>
-</div>
--->
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
 .popover-card {
-	margin: 0 auto;
+	margin: 25px auto;
 	text-align: center;
 	background-color: #fff;
 	width: 325px;
@@ -68,13 +20,20 @@ mat-spinner { margin: 0 auto; }
 </style>
 
 <div class="container">
+
+<!-- temporary: make all three screens visible at once -->
+<mat-grid-list cols="3">
+
+<!-- sort section -->
+<mat-grid-tile>
 	<mat-card class="popover-card">
 		<form>
 			<mat-form-field style="width: 100%;">
 				<input matInput #search type="search" placeholder="Enter monster name"
-					(input)="filterByName(search.value)" 
+					(input)="updateView()" 
 					[formControl]="searchControl" 
-					[errorStateMatcher]="searchMatcher">
+					[errorStateMatcher]="searchMatcher"
+					[(ngModel)]="searchValue">
 				<mat-error *ngIf="searchControl.hasError('pattern')">
 					Please use valid characters.
 				</mat-error>
@@ -84,6 +43,21 @@ mat-spinner { margin: 0 auto; }
 			</mat-form-field>
 		</form>
 
+		<mat-card-actions>
+			<mat-button-toggle-group #sortGroup="matButtonToggleGroup" (change)="setSortValue(sortGroup.value)" value="total">
+				<mat-button-toggle value="id">#</mat-button-toggle>
+				<mat-button-toggle value="hp">HP</mat-button-toggle>
+				<mat-button-toggle value="atk">ATK</mat-button-toggle>
+				<mat-button-toggle value="rcv">RCV</mat-button-toggle>
+				<mat-button-toggle value="total">Total</mat-button-toggle>
+			</mat-button-toggle-group>
+		</mat-card-actions>
+	</mat-card>
+</mat-grid-tile>
+
+<!-- results section -->
+<mat-grid-tile>
+	<mat-card class="popover-card">
 		<mat-card-content>
 			<section id="mainSort">
 			</section>
@@ -93,7 +67,7 @@ mat-spinner { margin: 0 auto; }
 				</div>
 				<mat-grid-list cols="5" rowHeight="1:1">
 					<mat-grid-tile *ngFor="let mon of filteredList">
-						<img src=".{{mon.image60_href}}" width="60">
+						<img src="{{mon.image60_href}}" width="60">
 					</mat-grid-tile>
 				</mat-grid-list>
 			</section>
@@ -114,4 +88,29 @@ mat-spinner { margin: 0 auto; }
 			</mat-button-toggle-group>
 		</mat-card-actions>
 	</mat-card>
+</mat-grid-tile>
+
+<!-- filter section -->
+<mat-grid-tile>
+	<mat-card class="popover-card">
+		<span>Awakenings: </span>
+		<mat-chip-list>
+			<mat-chip>
+				<ng-container *ngFor="let awakening of currentAwakeningOptions; let index = index">
+					<img src="/static/img/awakenings/{{awakening.id}}.png" width="32" (click)="removeAwakeningOption(index)">
+				</ng-container>
+			</mat-chip>
+		</mat-chip-list>
+		<mat-card-content>
+			<mat-grid-list cols="10" rowHeight="1:1">
+				<mat-grid-tile *ngFor="let awakening of allAwakeningOptions">
+						<a mat-button href="#" (click)="addAwakeningOption(awakening)">
+							<img src="/static/img/awakenings/{{awakening.id}}.png" width="32">
+						</a>
+				</mat-grid-tile>
+			</mat-grid-list>
+		</mat-card-content>
+	</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
 </div>
