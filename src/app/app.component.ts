@@ -5,11 +5,10 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Monster } from './shared/monster';
 import { Slot } from './shared/slot';
 import { Awakening } from './shared/awakening';
-import { SortOption } from './shared/sortOption';
+import './shared/monster-array';
 
 import { MonsterListService } from './monster-list.service';
 import { AwakeningListService } from './awakening-list.service';
-import { DefaultService } from './default.service';
 
 enum Position {	'leader', 'sub1', 'sub2', 'sub3', 'sub4', 'friend_leader' };
 enum Attribute { 'fire', 'water', 'wood', 'light', 'dark', 'heart' };
@@ -26,6 +25,7 @@ export class onChange extends ErrorStateMatcher {
 
 @Component({
   selector: 'app-root',
+  // templateUrl: './app.component.html',
   templateUrl: './andrew.html',
   styleUrls: ['./app.component.css']
 })
@@ -34,66 +34,96 @@ export class AppComponent {
 	constructor(
 		private monsterList: MonsterListService,
 		private awakeningList: AwakeningListService,
-		private def: DefaultService
 	) {
 		this.monsterList.monsterList$
-			.subscribe(response => { this.globalList = response },
-				() => {},
+			.subscribe(response => {
+				this.globalList = response
+			},
+				(e) => {
+					console.error("Failed to subscribe to MonsterListService.");
+					console.error("ERROR: ", e);
+				},
 				() => {
-					console.log("Subscribed to MonsterListService.");
-					this.filteredList = this.globalList; // show all monsters on page by default
+					console.info("Subscribed to MonsterListService.");
+					// this.filteredList = this.globalList; // show all monsters on page by default
 				}
 			);
 
-		this.allAwakeningOptions = this.awakeningList.awakeningList;
+		this.awakeningList.awakeningList$
+			.subscribe(response => { this.allAwakeningOptions = response },
+				() => { console.error("Failed to subscribe to AwakeningListService.") },
+				() => { console.log("Subscribed to AwakeningListService.") }
+			);
 	};
 
-	globalList: Monster[]; // untouched list of all monster
-		filteredList: Monster[]; // list of monsters shown on view
-	
-	allSortOptions: SortOption[]; // untouched list of all sort options
-		defaultSortOptions: SortOption[]; // untouched list of default sort options
-	
+	globalList: Monster[] = []; // untouched list of all monster
+		filteredList: Monster[] = []; // pre-processed list of monsters
+		sortedFilteredList: Monster[] = []; // list of monsters shown on view
+
+	// allSortOptions: SortOption[]; // untouched list of all sort options
+		// defaultSortOptions: SortOption[]; // untouched list of default sort options
+		// currentSortOption: SortOption['totalSort']; // current sort option
+		sortValue: string = 'total'; // current sort option
+
 	allAwakeningOptions: Awakening[]; // untouched list of all awakenings
 		defaultAwakeningOptions: Awakening[]; // untouched list of default awakening options
-		
-	allFilterOptions: SortOption[]; // untouched list of all filter options
+		currentAwakeningOptions: Awakening[] = []; // list of current awakening filters
 
-
-	filterByName(searchString: string) {
-		if (this.searchControl.errors == null) {
-			this.filteredList = this.globalList.filter(
-				(element) => {
-					return (element.name.search(new RegExp(searchString,"i")) > 0)
-				}
-			) // filter
-		} else {
-			// console.log("this.searchControl.errors");
-		}
-	}; // filterByName
+	// allFilterOptions: SortOption[]; // untouched list of all filter options
 
 	// search must have at least two characters and valid characters
-	searchControl = new FormControl('', [
+	searchControl: FormControl = new FormControl('', [
 	    Validators.minLength(2),
 	    Validators.pattern("^[a-zA-Z0-9_]*$")
   	]);
 
 	// detect search errors on change instead of submit
+	// onChange class located above @component
 	searchMatcher = new onChange();
 
 
-	currentSelection: Slot;
-
-	clearTeam() {};
-
-	blankSlot(): Slot {
-		return new Slot();
-	};
+	setSortValue(stat: string) {
+		this.sortValue = stat;
+		this.updateView();
+	}
 
 
+	searchValue: string = '';
+
+	updateView(): void {
+		// filter by name
+		if (this.searchControl.errors == null) {
+			this.filteredList = this.globalList.filter(
+				(monster) => {
+					return (monster.name.search(new RegExp(this.searchValue,"i")) > 0);
+				}
+			)
+
+			// filter by awakening
+			this.filteredList = this.filteredList.filterByAwakening(this.currentAwakeningOptions);
+
+			// sort by stat
+			// TODO: use sortOption
+			this.filteredList = this.filteredList.sortByStat(this.sortValue);
+		} else {
+			// console.log(this.searchControl.errors);
+		}
+	}; // filterByName
+
+	addAwakeningOption(option: Awakening): void {
+		this.currentAwakeningOptions.push(option);
+		this.updateView();
+	}
+	
+	removeAwakeningOption(index: number): void {
+		this.currentAwakeningOptions.splice(index, 1);
+		this.updateView();
+	}
 
 	ngOnInit() {
 		// define sort options
+
+		// console.log("compareArrays", this.compareArrays([1,1,1,1,1,1,1,3],[1,1,1,1,1,3]));
 
 		// subscribe
 		// setTimeout(()=>{console.log(this.globalList)},5000);
@@ -106,9 +136,10 @@ export class AppComponent {
 		// post-processing of list to complete awakening data
 	};
 
-	searchList(globalList: Monster[], sortOptions: SortOption[], awakeningOptions: Awakening[]) {
-		// search globalList and return results
-		return Monster;
+	currentSelection: Slot;
+	clearTeam() {};
+	blankSlot(): Slot {
+		return new Slot();
 	};
 
 	setSlot(monster: Monster, slot: Slot) {
