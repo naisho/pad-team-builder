@@ -11,8 +11,10 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule, MatCardModule, MatButtonModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 // data-source
 import { DataSource } from './data-source/source-manager.service';
@@ -24,8 +26,6 @@ import { MonsterListService } from './monster-list.service';
 import { AwakeningListService } from './awakening-list.service';
 
 import { Filters } from './shared/filters';
-import { SortOption } from './shared/sortOption';
-import { DefaultService } from './default.service';
 
 
 @NgModule({
@@ -43,7 +43,8 @@ import { DefaultService } from './default.service';
     MatButtonToggleModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   exports: [
     MatGridListModule,
@@ -52,15 +53,14 @@ import { DefaultService } from './default.service';
     MatButtonToggleModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   declarations: [ AppComponent ],
   providers: [
     MonsterListService,
     AwakeningListService,
     Filters,
-    SortOption,
-    DefaultService,
   	
     DataSource,
     LocalService,

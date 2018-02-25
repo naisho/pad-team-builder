@@ -30,4 +30,8 @@ export class Monster {
   latent4: number;
   latent5: number;
   latent6: number;
+
+  isMaxLevel() {
+    return (this.max_level == 99);
+  }
 }
