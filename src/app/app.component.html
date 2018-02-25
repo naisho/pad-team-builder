@@ -5,12 +5,11 @@
 
 		</div>
 	</header>
-	
+		
 	<section>
-		<div id="team1" class="team">
-			
+		<div *ngFor="let team of teams; let i = index;" id="team_{{i + 1}}" class="team">
 			<div class="left">
-				<h4>Team 1</h4>
+				<h4>Team {{i + 1}}</h4>
 				<div class="selectBtn">
 					<button>Reset</button><!--if team filled?-->
 				</div>
@@ -18,111 +17,22 @@
 			<div class="right">
 				<div class="team-area">
 					<ul class="team-list">
-						<li class="team-slot">
-							<div class="sub">
+						<li *ngFor="let mon of team.slots; let slotNum = index" class="team-slot" id="slot_{{slotNum + 1}}">
+							<div class="sub" id="sub_{{slotNum + 1}}">
 								<div class="img">
-									<img src="/assets/img/mon/3535.png" />
+									<img src="/static/img/monsters/60x60/1000.23034e2dd59f.png" />
 									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
+										<a href="#" (click)="openDialog(i+1, 'sub', slotNum +1)"><span class="icon edit">Edit</span></a>
 										<a href="#"><span class="icon remove">Remove</span></a>
 									</div>
 								</div>
 							</div>
-							<div class="assist">
+							<div class="assist" id="assist_{{slotNum + 1}}">
 								<div class="img">
-									<img src="/assets/img/mon/1746.png" />
+									<img src="/static/img/monsters/60x60/1014.a09843c83c77.png" />
 									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="team-slot">
-							<div class="sub">
-								<div class="img">
-									<img src="/assets/img/mon/2102.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="assist">
-								<div class="img">
-									<img src="/assets/img/mon/2012.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="team-slot">
-							<div class="sub">
-								<div class="img">
-									<img src="/assets/img/mon/3521.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="assist">
-								<div class="img">
-									<img src="/assets/img/mon/1619.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="team-slot">
-							<div class="sub">
-								<div class="img">
-									<img src="/assets/img/mon/2948.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="assist">
-								<div class="img">
-									<img src="/assets/img/mon/0.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="team-slot">
-							<div class="sub">
-								<div class="img">
-									<img src="/assets/img/mon/2948.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="assist">
-								<div class="img">
-									<img src="/assets/img/mon/0.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="team-slot">
-							<div class="sub">
-								<div class="img">
-									<img src="/assets/img/mon/3535.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="assist">
-								<div class="img">
-									<img src="/assets/img/mon/0.png" />
-									<div class="action-overlay">
-										<a href="#"><span class="icon edit">Edit</span></a>
+										<a href="#" (click)="openDialog(i+1, 'assist', slotNum+1)"><span class="icon edit">Edit</span></a>
+										<a href="#"><span class="icon remove">Remove</span></a>
 									</div>
 								</div>
 							</div>
@@ -131,25 +41,5 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="team2" class="team">
-			<div class="left">
-				<h4>Team 2</h4>
-				<div class="selectBtn">
-					<button>Pick team</button>
-				</div>
-			</div>
-			<div class="right">
-				<ul class="team-list">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-			</div>
-		</div>
-
 	</section>
 </div>
