@@ -109,7 +109,7 @@ export class FilterComponent {
 			// console.log(this.searchControl.errors);
 		}
 	}; // filterByName
-/*
+
 	addAwakeningOption(option: Awakening): void {
 		this.currentAwakeningOptions.push(option);
 		this.updateView();
@@ -119,12 +119,9 @@ export class FilterComponent {
 		this.currentAwakeningOptions.splice(index, 1);
 		this.updateView();
 	}
-*/
+
 	ngOnInit() {
-
 		// define sort options
-
-		// console.log("compareArrays", this.compareArrays([1,1,1,1,1,1,1,3],[1,1,1,1,1,3]));
 
 		// subscribe
 		// setTimeout(()=>{console.log(this.globalList)},5000);
