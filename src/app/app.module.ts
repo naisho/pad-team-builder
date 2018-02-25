@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 
 // declarations
-import { AppComponent } from './app.component';
+import { AppComponent, MonsterPickerDialog } from './app.component';
+import { TeamViewComponent } from './teamview.component';
+import { FilterComponent } from './filter.component';
 
 // imports
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +15,7 @@ import { MatGridListModule, MatCardModule, MatButtonModule, MatButtonToggleModul
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -26,6 +29,7 @@ import { MonsterListService } from './monster-list.service';
 import { AwakeningListService } from './awakening-list.service';
 
 import { Filters } from './shared/filters';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -44,7 +48,9 @@ import { Filters } from './shared/filters';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    AppRoutingModule
   ],
   exports: [
     MatGridListModule,
@@ -54,9 +60,11 @@ import { Filters } from './shared/filters';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
   ],
-  declarations: [ AppComponent ],
+  entryComponents: [ MonsterPickerDialog ],
+  declarations: [ AppComponent, TeamViewComponent, FilterComponent, MonsterPickerDialog ],
   providers: [
     MonsterListService,
     AwakeningListService,

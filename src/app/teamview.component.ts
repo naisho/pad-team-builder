@@ -27,16 +27,13 @@ export class onChange extends ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  //templateUrl: './andrew.html',
+  selector: 'app-jennfer',
+  templateUrl: './team-view.html',
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class TeamViewComponent {
 	constructor(
-		private monsterList: MonsterListService,
-		private awakeningList: AwakeningListService,
 		public dialog: MatDialog
 	) {
 
