@@ -77,14 +77,22 @@ mat-spinner { margin: 0 auto; }
 		</mat-card-content>
 
 		<mat-card-actions>
-			<!-- attribute filter placeholder -->
-			<!-- fire water wood light dark -->
-			<mat-button-toggle-group>
-				<mat-button-toggle><mat-icon>whatshot</mat-icon></mat-button-toggle>
-				<mat-button-toggle><mat-icon>local_drink</mat-icon></mat-button-toggle>
-				<mat-button-toggle><mat-icon>local_florist</mat-icon></mat-button-toggle>
-				<mat-button-toggle><mat-icon>radio_button_unchecked</mat-icon></mat-button-toggle>
-				<mat-button-toggle><mat-icon>radio_button_checked</mat-icon></mat-button-toggle>
+			<!-- primary attribute -->
+			<mat-button-toggle-group multiple>
+				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.fire)">R</mat-button-toggle>
+				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.water)">U</mat-button-toggle>
+				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.wood)">G</mat-button-toggle>
+				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.light)">W</mat-button-toggle>
+				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.dark)">B</mat-button-toggle>
+			</mat-button-toggle-group>
+
+			<!-- subattribute -->
+			<mat-button-toggle-group multiple>
+				<mat-button-toggle (change)="setSubAttribute(Attribute.fire)">R</mat-button-toggle>
+				<mat-button-toggle (change)="setSubAttribute(Attribute.water)">U</mat-button-toggle>
+				<mat-button-toggle (change)="setSubAttribute(Attribute.wood)">G</mat-button-toggle>
+				<mat-button-toggle (change)="setSubAttribute(Attribute.light)">W</mat-button-toggle>
+				<mat-button-toggle (change)="setSubAttribute(Attribute.dark)">B</mat-button-toggle>
 			</mat-button-toggle-group>
 		</mat-card-actions>
 	</mat-card>

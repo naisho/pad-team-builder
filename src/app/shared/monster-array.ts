@@ -5,6 +5,8 @@ declare global {
   interface Array<T> {
     filterByAwakening(currentAwakeningOptions: Awakening[]): Array<Monster>;
     filterByName(searchString: string): Array<Monster>;
+    filterByPrimaryAttribute(attribute: number): Array<Monster>;
+    filterBySubAttribute(attribute: number): Array<Monster>;
     sortByStat(stat: string): Array<Monster>;
   }
 }
@@ -46,7 +48,7 @@ Array.prototype.filterByAwakening =
   }; // filterByAwakening
 
 Array.prototype.filterByName =
-  function(searchString:string) {
+  function(searchString: string) {
     return this.filter(
         monster => {
           // if monster.name contains searchString, .search will
@@ -55,6 +57,24 @@ Array.prototype.filterByName =
         }
       );
   }; // filterByName
+
+Array.prototype.filterByPrimaryAttribute =
+  function(attribute: number) {
+    return this.filter(
+      monster => {
+        return (monster['element'] == attribute);
+      }
+     );
+  }; // filterByPrimaryAttribute
+
+Array.prototype.filterBySubAttribute =
+  function(attribute: number) {
+    return this.filter(
+      monster => {
+        return (monster['element2'] == attribute);
+      }
+     );
+  }; // filterBySubAttribute
 
 Array.prototype.sortByStat =
   function(stat: string) {
