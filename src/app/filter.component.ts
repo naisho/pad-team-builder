@@ -74,11 +74,7 @@ export class FilterComponent {
 		filteredList: Monster[] = []; // pre-processed list of monsters
 		sortedFilteredList: Monster[] = []; // list of monsters shown on view
 
-	// allSortOptions: SortOption[]; // untouched list of all sort options
-		// defaultSortOptions: SortOption[]; // untouched list of default sort options
-		// currentSortOption: SortOption['totalSort']; // current sort option
-		sortValue: string = 'total'; // current sort option
-
+	sortValue: string = 'total'; // current sort option (HP, ATK, RCV, Total)
 
 	allAwakeningOptions: Awakening[]; // untouched list of all awakenings
 		defaultAwakeningOptions: Awakening[]; // untouched list of default awakening options
@@ -87,13 +83,8 @@ export class FilterComponent {
 	primaryAttributeFilter: boolean[] = [false, false, false, false, false]; // current primary attribute filter
 	subAttributeFilter: boolean[] = [false, false, false, false, false]; // current sub attribute filter
 
-	// allFilterOptions: SortOption[]; // untouched list of all filter options
-
-	// search must have at least two characters and valid characters
 	searchControl: FormControl = new FormControl('', [
-	    Validators.pattern("^[a-zA-Z0-9_]*$")
-	    // Validators.pattern("^.{1}$"), // exactly one character
-	    // minFiltersValidator(1)
+	    Validators.pattern("^[a-zA-Z0-9_]*$"), // only valid characters 
   	]);
 
 	// detect search errors on change instead of submit
@@ -154,22 +145,22 @@ export class FilterComponent {
 	addAwakeningOption(option: Awakening): void {
 		this.currentAwakeningOptions.push(option);
 		this.updateView();
-	}
+	} // addAwakeningOption
 	
 	removeAwakeningOption(index: number): void {
 		this.currentAwakeningOptions.splice(index, 1);
 		this.updateView();
-	}
+	} // removeAwakeningOption
 
 	setPrimaryAttribute(attribute: number): void {
 		this.primaryAttributeFilter[attribute] = !this.primaryAttributeFilter[attribute];
 		this.updateView();
-	}
+	} // setPrimaryAttribute
 
 	setSubAttribute(attribute: number): void {
 		this.subAttributeFilter[attribute] = !this.subAttributeFilter[attribute];
 		this.updateView();
-	}
+	} // setSubAttribute
 
 	ngOnInit() {
 	};

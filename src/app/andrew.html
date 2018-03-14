@@ -1,16 +1,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
+.container {
+	margin: 0 0 0 0;
+}
 .popover-card {
-	margin: 25px auto;
 	text-align: center;
 	background-color: #fff;
-	width: 325px;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 .button-row {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+}
+.att-group {
+	display: inline-block;
 }
 
 .mdl-cell--att { width: calc(20% - 16px); }
@@ -21,11 +27,7 @@ mat-spinner { margin: 0 auto; }
 
 <div class="container">
 
-<!-- temporary: make all three screens visible at once -->
-<mat-grid-list cols="3">
-
-<!-- sort section -->
-<mat-grid-tile>
+	<!-- sort section -->
 	<mat-card class="popover-card">
 		<form>
 			<mat-form-field style="width: 100%;">
@@ -46,18 +48,14 @@ mat-spinner { margin: 0 auto; }
 		<mat-card-actions>
 			<mat-button-toggle-group #sortGroup="matButtonToggleGroup" (change)="setSortValue(sortGroup.value)" value="total">
 				<mat-button-toggle value="id">#</mat-button-toggle>
-				<mat-button-toggle value="hp">HP</mat-button-toggle>
-				<mat-button-toggle value="atk">ATK</mat-button-toggle>
-				<mat-button-toggle value="rcv">RCV</mat-button-toggle>
-				<mat-button-toggle value="total">Total</mat-button-toggle>
+				<mat-button-toggle value="hp">H</mat-button-toggle>
+				<mat-button-toggle value="atk">A</mat-button-toggle>
+				<mat-button-toggle value="rcv">R</mat-button-toggle>
+				<mat-button-toggle value="total">=</mat-button-toggle>
 			</mat-button-toggle-group>
 		</mat-card-actions>
-	</mat-card>
-</mat-grid-tile>
 
-<!-- results section -->
-<mat-grid-tile>
-	<mat-card class="popover-card">
+	<!-- results section -->
 		<mat-card-content>
 			<section id="mainSort">
 			</section>
@@ -77,33 +75,32 @@ mat-spinner { margin: 0 auto; }
 		</mat-card-content>
 
 		<mat-card-actions>
-			<!-- primary attribute -->
-			<mat-button-toggle-group multiple>
-				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.fire)">R</mat-button-toggle>
-				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.water)">U</mat-button-toggle>
-				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.wood)">G</mat-button-toggle>
-				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.light)">W</mat-button-toggle>
-				<mat-button-toggle (change)="setPrimaryAttribute(Attribute.dark)">B</mat-button-toggle>
-			</mat-button-toggle-group>
-
-			<!-- subattribute -->
-			<mat-button-toggle-group multiple>
-				<mat-button-toggle (change)="setSubAttribute(Attribute.fire)">R</mat-button-toggle>
-				<mat-button-toggle (change)="setSubAttribute(Attribute.water)">U</mat-button-toggle>
-				<mat-button-toggle (change)="setSubAttribute(Attribute.wood)">G</mat-button-toggle>
-				<mat-button-toggle (change)="setSubAttribute(Attribute.light)">W</mat-button-toggle>
-				<mat-button-toggle (change)="setSubAttribute(Attribute.dark)">B</mat-button-toggle>
-			</mat-button-toggle-group>
+			<div class="att-group">
+				<button (change)="setPrimaryAttribute(Attribute.fire)">R</button>
+				<button (change)="setSubAttribute(Attribute.fire)">R</button>
+			</div>
+			<div class="att-group">
+				<button (change)="setPrimaryAttribute(Attribute.water)">U</button>
+				<button (change)="setSubAttribute(Attribute.water)">U</button>
+			</div>
+			<div class="att-group">
+				<button (change)="setPrimaryAttribute(Attribute.wood)">G</button>
+				<button (change)="setSubAttribute(Attribute.wood)">G</button>
+			</div>
+			<div class="att-group">
+				<button (change)="setPrimaryAttribute(Attribute.light)">W</button>
+				<button (change)="setSubAttribute(Attribute.light)">W</button>
+			</div>
+			<div class="att-group">
+				<button (change)="setPrimaryAttribute(Attribute.dark)">B</button>
+				<button (change)="setSubAttribute(Attribute.dark)">B</button>
+			</div>
 		</mat-card-actions>
-	</mat-card>
-</mat-grid-tile>
 
-<!-- filter section -->
-<mat-grid-tile>
-	<mat-card class="popover-card">
+	<!-- filter section -->
 		<span>Awakenings: </span>
 		<mat-chip-list>
-			<mat-chip>
+			<mat-chip style="margin: 0 auto;">
 				<ng-container *ngFor="let awakening of currentAwakeningOptions; let index = index">
 					<img src="/static/img/awakenings/{{awakening.id}}.png" width="32" (click)="removeAwakeningOption(index)">
 				</ng-container>
@@ -119,6 +116,4 @@ mat-spinner { margin: 0 auto; }
 			</mat-grid-list>
 		</mat-card-content>
 	</mat-card>
-</mat-grid-tile>
-</mat-grid-list>
 </div>
